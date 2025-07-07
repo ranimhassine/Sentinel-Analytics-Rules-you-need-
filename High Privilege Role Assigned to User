@@ -1,0 +1,6 @@
+#Detect unexpected privilege escalation (break in least privilege)
+AuditLogs
+| where OperationName == "Add member to role"
+| where Result == "success"
+| project TimeGenerated, InitiatedBy = Identity, TargetUser = TargetResources[0].userPrincipalName, Role = TargetResources[0].displayName
+| where Role contains "Global Administrator" or Role contains "Privileged"
