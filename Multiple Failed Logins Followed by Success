@@ -1,0 +1,12 @@
+#Detect brute-force or password-guessing attempts
+let failedAttempts = SigninLogs
+| where ResultType == "50074" or ResultType == "50126"  // Invalid credentials
+| summarize FailedCount = count() by UserPrincipalName, bin(TimeGenerated, 5m)
+| where FailedCount >= 5;
+let successfulLogin = SigninLogs
+| where ResultType == "0";
+failedAttempts
+| join kind=inner (
+    successfulLogin
+) on UserPrincipalName
+| where successfulLogin.TimeGenerated > failedAttempts.TimeGenerated
