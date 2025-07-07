@@ -1,0 +1,6 @@
+#Catch cloud modifications done from rare or risky countries
+AzureActivity
+| where ActivityStatus == "Succeeded"
+| where OperationNameValue contains "Write"
+| extend Location = tostring(parse_json(CallerIpAddress).location)
+| where Location !in ("France", "Germany", "UK") // Your usual regions
