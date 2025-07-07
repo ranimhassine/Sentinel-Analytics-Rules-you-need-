@@ -1,0 +1,13 @@
+#Detecting signin attempts from a non admin Use ( using a watchlist of admins named allowedadmins)
+let AllowedUsers = _GetWatchlist('allowedadmins')
+                   | project AllowedUser = tostring(UserPrincipalName);
+SigninLogs
+| where TimeGenerated > ago(1h)
+| where AppDisplayName == "Microsoft 365 Security and Compliance Center"
+| where not(UserPrincipalName in (AllowedUsers))
+|project TimeGenerated,
+        UserPrincipalName,
+        IPAddress,
+        AppDisplayName,
+        ResultType,
+        Location
