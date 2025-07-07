@@ -1,0 +1,5 @@
+#Detects suspicious PowerShell commands
+SecurityAlert
+| where ProductName == "Microsoft Defender for Endpoint"
+| where AlertName has "PowerShell"
+| extend AccountName = tostring(parse_json(Entities)[0].Name)
