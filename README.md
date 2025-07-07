@@ -31,10 +31,6 @@ To deploy these rules:
 
 Contributions are welcome! Feel free to submit a pull request with new rules, improvements, or suggestions.
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
 ---
 
 **Stay secure. Stay ahead.**
