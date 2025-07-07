@@ -1,0 +1,6 @@
+#Detects potential use of Mimikatz password dumping tool
+DeviceProcessEvents
+| where Timestamp > ago(1h)
+| where FileName in~ ("mimikatz.exe", "mimidrv.sys", "mimikatz", "mimidrv")
+    or ProcessCommandLine has_any ("sekurlsa", "logonpasswords", "kerberos", "tspkg", "wdigest")
+| project Timestamp, DeviceName, FileName, ProcessCommandLine, InitiatingProcessAccountName, ReportId
