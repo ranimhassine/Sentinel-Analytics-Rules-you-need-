@@ -1,0 +1,5 @@
+#Detect large outbound emails with sensitive attachments
+EmailEvents
+| where EmailDirection == "Send"
+| where AttachmentCount > 3 or TotalMessageSize > 10485760 // >10MB
+| where RecipientDomain != "yourcompany.com"
