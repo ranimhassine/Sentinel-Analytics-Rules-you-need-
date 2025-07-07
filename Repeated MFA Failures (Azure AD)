@@ -1,0 +1,6 @@
+#Detects users with 3 or more MFA failures in 5 mins
+SigninLogs
+| where TimeGenerated > ago(1d)
+| extend ErrorCode = toint(Status.errorCode)
+| where ErrorCode in (50074, 50076, 500121)
+| project TimeGenerated, UserPrincipalName, ErrorCode, Status, IPAddress, AppDisplayName
