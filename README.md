@@ -25,16 +25,6 @@ To deploy these rules:
 4. Configure your alert logic, thresholds, and actions.
 5. Save and activate the rule.
 
-## 📁 Folder Structure
-/AnalyticsRules
-│
-├── BruteForce-SuccessAfterFailures.rule
-├── ImpossibleTravel.rule
-├── PrivilegeEscalation.rule
-├── DataExfiltration-Email.rule
-├── CredentialDumping.rule
-├── AzureResourceWrite-UnusualLocation.rule
-
 > Each `.rule` file contains metadata, severity level, MITRE mapping, and the detection logic.
 
 ## 🤝 Contributing
